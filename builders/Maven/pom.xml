@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <url>http://www.netology.ru</url>
+
+  <name>App</name>
+
+  <groupId>ru.netology</groupId>
+  <artifactId>App</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <junit-jupiter.version>5.3.1</junit-jupiter.version>
+    <build.number>1</build.number>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+<!--  Пример подключения своего репозитория-->
+<!--  <repositories>-->
+<!--    <repository>-->
+<!--      <id>repo1</id>-->
+<!--      <url>http://my-site.netology.ru</url>-->
+<!--    </repository>-->
+<!--    <repository>-->
+<!--      <id>repo2</id>-->
+<!--      <url>http://mirror.netology.ru</url>-->
+<!--    </repository>-->
+<!--  </repositories>-->
+
+  <build>
+    <outputDirectory>target/classes</outputDirectory>
+    <finalName>App-${version}</finalName>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/resources</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+    <!--    Дополнительно по плагинам на практике -->
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.2</version>
+        <!--          Пример по изменению файла манифеста -->
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Version>${implementation.version}</Implementation-Version>
+              <Build-Number>${build.number}</Build-Number>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>groovy-maven-plugin</artifactId>
+        <version>2.1</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <source>
+                project.properties.setProperty('implementation.version', "${project.version}".replace('SNAPSHOT', "${build.number}"))
+              </source>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
