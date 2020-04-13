@@ -1,4 +1,4 @@
-# 3. Домашние задания по курсу «Java Core II»
+# 3. Код к курсу «Java Core II»
 
 ## Блок 1. Stream API, Generics
 
@@ -15,12 +15,12 @@
 1.6 Чтение файлов java, txt, csv, json, xml. Работа с jacksonMapper, монада Optional
 
 
-# 4. Домашние задания по курсу «Шаблоны проектирования»
+# 4. Код к курсу «Шаблоны проектирования»
 
-1.1 [Порождающие шаблоны. Builder, Singleton, Factory Method, Abstract Factory, Prototype](./creational/README.md)
+1.1 Порождающие шаблоны. Builder, Singleton, Factory Method, Abstract Factory, Prototype
 
 
-# 6. Домашние задания по курсу «Многопоточное и функциональное программирование»
+# 6. Код к курсу «Многопоточное и функциональное программирование»
 
 ## Блок 1. Многопоточное программирование
 
